@@ -1,0 +1,98 @@
+<template>
+  <div class="header">
+    <div class="title">CNode社区</div>
+    <div class="navbar">
+      <span class="tab" :class="{active:index===current}" v-for="(item,index) in tabs" :key="index" @click="switchTab(item.query,index)">{{item.name}}</span>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  components: {},
+  data () {
+    return {
+      current: 0,
+      tabs: [
+        {
+          name: '首页',
+          query: 'all'
+        },
+        {
+          name: '精华',
+          query: 'good'
+        },
+        {
+          name: '分享',
+          query: 'share'
+        },
+        {
+          name: '问答',
+          query: 'ask'
+        },
+        {
+          name: '招聘',
+          query: 'job'
+        }
+      ]
+    }
+  },
+  methods: {
+    switchTab (val, idx) {
+      // this.$router.push({ path: '/', query: { tab: val } })
+      this.current = idx
+      this.$store.dispatch('getTopics', val)
+    }
+  },
+  mounted () {
+    this.$store.dispatch('getTopics', 'all')
+  }
+}
+</script>
+<style lang="scss" scoped>
+.header{
+  position: relative;
+  width: 100%;
+  height: 280px;
+  background: #444444;
+  color: #fff;
+  overflow: hidden;
+  .title{
+    text-align: center;
+    margin-top: 30px;
+    font-size: 40px;
+  }
+  .navbar{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: space-around;
+    font-size: 32px;
+    .tab{
+      position: relative;
+      width: 20%;
+      box-sizing: border-box;
+      display: block;
+      line-height: 90px;
+      text-align: center;
+    }
+    .tab.active{
+      font-size: 36px;
+      font-weight: 700;
+    }
+    .tab.active::after{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      content: "";
+      display: block;
+      width: 100%;
+      height: 6px;
+      background: #fff;
+    }
+  }
+}
+</style>
