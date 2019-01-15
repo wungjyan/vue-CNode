@@ -8,7 +8,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@keyframes loading {
+@keyframes load {
   0% {
     transform: scaleY(0.4);
   }
@@ -32,7 +32,7 @@
     display: inline-block;
     margin-right: 5px;
     background: blue;
-    animation: loading 1.2s ease-in-out infinite;
+    animation: load 1.2s ease-in-out infinite;
   }
   .line1 {
     animation-delay: -1.1s;
