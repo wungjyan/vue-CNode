@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <c-header/>
@@ -7,8 +6,8 @@
 </template>
 
 <script>
-import cHeader from '../components/c-header'
-import cList from '../components/c-list'
+import cHeader from '../components/Header/Header'
+import cList from '../components/TopicsList/TopicsList'
 export default {
   components: {
     cHeader,

@@ -1,4 +1,4 @@
-import { get } from '../request'
+import { get } from '../config/request'
 
 export default {
   getTopics ({ commit }, tab) {
