@@ -38,20 +38,23 @@ export default {
     }
   },
   methods: {
-    switchTab (val, idx) {
+    switchTab (tab, idx) {
       // this.$router.push({ path: '/', query: { tab: val } })
       this.current = idx
-      this.$store.dispatch('getTopics', val)
+      this.$store.dispatch('firstGetTopics', tab)
     }
   },
   mounted () {
-    this.$store.dispatch('getTopics', 'all')
+    this.$store.dispatch('firstGetTopics', 'all')
   }
 }
 </script>
 <style lang="scss" scoped>
 .header{
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
   width: 100%;
   height: 280px;
   background: #444444;

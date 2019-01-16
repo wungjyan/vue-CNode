@@ -4,6 +4,9 @@
     <div v-else>
       <c-cell v-for="(item,index) in topicsList" :key="index" :article="item"/>
     </div>
+    <div class="load_more" v-show="topicsList.length>=20&&showLoadMore" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="5">
+      <c-loading :height="45"/>
+    </div>
   </div>
 </template>
 
@@ -17,14 +20,32 @@ export default {
     cCell
   },
   data () {
-    return {}
+    return {
+      busy: false
+    }
   },
   computed: {
-    ...mapState(['loading', 'topicsList'])
+    ...mapState(['loading', 'topicsList', 'tab', 'page', 'showLoadMore'])
   },
-  methods: {},
+  methods: {
+    loadMore: function () {
+      this.busy = true
+      setTimeout(() => {
+        this.$store.dispatch('loadMore', { page: this.page, tab: this.tab })
+        this.busy = false
+      }, 1000)
+    }
+  },
   mounted () {}
 }
 </script>
 <style lang="scss" scoped>
+.topics-wrap{
+  margin-top: 280px;
+}
+.load_more{
+  font-size: 26px;
+  color: #b4b4b4;
+  text-align: center;
+}
 </style>

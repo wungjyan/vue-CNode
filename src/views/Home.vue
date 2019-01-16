@@ -15,12 +15,15 @@ export default {
   },
   data () {
     return {
+      busy: false
     }
   },
   computed: {},
-  methods: {},
+  methods: {
+  },
   mounted () {}
 }
 </script>
 <style lang="scss" scoped>
+
 </style>

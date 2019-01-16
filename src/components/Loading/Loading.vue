@@ -1,5 +1,5 @@
 <template>
-  <div class="loading">
+  <div class="loading" :style="{height:height+'px'}">
     <div class="line1"></div>
     <div class="line2"></div>
     <div class="line3"></div>
@@ -7,6 +7,17 @@
     <div class="line5"></div>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    height: {
+      type: Number,
+      default: 64
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
 @keyframes load {
   0% {
@@ -23,7 +34,6 @@
   }
 }
 .loading {
-  height: 128px;
   display: flex;
   justify-content: center;
   > div {

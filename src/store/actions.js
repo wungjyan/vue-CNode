@@ -1,13 +1,24 @@
 import { get } from '../config/request'
 
 export default {
-  getTopics ({ commit }, tab) {
+  // 每一次切换类型都是第一次请求对应数据
+  firstGetTopics ({ commit }, tab) {
     // 通知正在请求
-    commit('LOADING')
+    commit('LOADING', tab)
     // 获取主题列表，更新数据
-    get('/topics', { tab, page: 1 }).then(res => {
+    get('/topics', { tab, page: 1, limit: 20 }).then(res => {
       if (res.data.success) {
-        commit('GETTOPICS', res.data.data)
+        commit('FIRST_GET_TOPICS', res.data.data)
+      }
+    })
+  },
+
+  // 加载更多数据
+  loadMore ({ commit }, payload) {
+    console.log('执行拉loadmore:', payload)
+    get('/topics', { tab: payload.tab, page: payload.page + 1, limit: 20 }).then(res => {
+      if (res.data.success) {
+        commit('LOAD_MORE', res.data.data)
       }
     })
   }

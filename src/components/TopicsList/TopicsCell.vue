@@ -120,6 +120,9 @@ export default {
       .count_of_visits{
         color: #b4b4b4;
       }
+      .time{
+        color: #778087;
+      }
     }
   }
 }
