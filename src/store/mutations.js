@@ -1,9 +1,10 @@
 export default {
   // 切换数据类型前，初始化state
-  LOADING (state, tab) {
+  LOADING (state, { tab, idx }) {
     state.topicsList = []
     state.loading = true
     state.tab = tab
+    state.current = idx
     state.page = 1
   },
   // 获取主题列表
@@ -23,5 +24,11 @@ export default {
     if (data.length < 20) {
       state.showLoadMore = false
     }
+  },
+
+  // 获取topic详情
+  GET_TOPIC_DETAIL (state, data) {
+    state.topicDetail = data
+    state.showLoading = false
   }
 }

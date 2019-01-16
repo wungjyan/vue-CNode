@@ -8,11 +8,10 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  components: {},
   data () {
     return {
-      current: 0,
       tabs: [
         {
           name: '首页',
@@ -37,15 +36,14 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapState(['current', 'tab'])
+  },
   methods: {
     switchTab (tab, idx) {
-      // this.$router.push({ path: '/', query: { tab: val } })
-      this.current = idx
-      this.$store.dispatch('firstGetTopics', tab)
+      this.$router.push('/')
+      this.$store.dispatch('firstGetTopics', { tab, idx })
     }
-  },
-  mounted () {
-    this.$store.dispatch('firstGetTopics', 'all')
   }
 }
 </script>

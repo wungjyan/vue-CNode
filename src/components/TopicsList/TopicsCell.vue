@@ -3,7 +3,7 @@
     <div class="avatar">
       <img :src="article.author.avatar_url">
     </div>
-    <div class="title">
+    <div class="title" @click="gotoTopic(article.id)">
       <div class="line1">
         <span v-if="article.top" class="put_top">置顶</span>
         <span v-else-if="article.good" class="put_good">精华</span>
@@ -48,6 +48,9 @@ export default {
         default:
           return '分享'
       }
+    },
+    gotoTopic (id) {
+      this.$router.push({ name: 'topic', params: { id } })
     }
   },
   mounted () {}

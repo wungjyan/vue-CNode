@@ -1,5 +1,5 @@
 <template>
-  <div class="topics-wrap">
+  <div class="topics_wrap">
     <c-loading v-if="loading" />
     <div v-else>
       <c-cell v-for="(item,index) in topicsList" :key="index" :article="item"/>
@@ -40,7 +40,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.topics-wrap{
+.topics_wrap{
   margin-top: 280px;
 }
 .load_more{

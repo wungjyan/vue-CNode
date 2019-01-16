@@ -8,6 +8,7 @@
 <script>
 import cHeader from '../components/Header/Header'
 import cList from '../components/TopicsList/TopicsList'
+import { mapState } from 'vuex'
 export default {
   components: {
     cHeader,
@@ -18,10 +19,15 @@ export default {
       busy: false
     }
   },
-  computed: {},
+  computed: {
+    ...mapState(['tab', 'current'])
+  },
   methods: {
   },
-  mounted () {}
+  mounted () {
+    // 首次加载到首页，获取此数据
+    this.$store.dispatch('firstGetTopics', { tab: this.tab, idx: this.current })
+  }
 }
 </script>
 <style lang="scss" scoped>
