@@ -1,4 +1,4 @@
-import { get } from '../config/request'
+import { get, post } from '../config/request'
 
 export default {
   // 每一次切换类型都是第一次请求对应数据
@@ -26,10 +26,22 @@ export default {
   // 获取主题详情
   getTopicDetail ({ commit }, id) {
     get('/topic/' + id).then(res => {
-      console.log(res)
       if (res.data.success) {
         commit('GET_TOPIC_DETAIL', res.data.data)
       }
+    })
+  },
+
+  // 验证登录
+  validaLogin ({ commit }, accesstoken) {
+    post('/accesstoken', { accesstoken }).then(res => {
+      console.log(res)
+      if (res.data.success) {
+        const { avatar_url, id, loginname } = res.data // eslint-disable-line
+        commit('VALIDA_LOGIN', { avatar_url, id, loginname, accesstoken })
+      }
+    }).catch(() => {
+      commit('VALIDA_FAIL')
     })
   }
 }

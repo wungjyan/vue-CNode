@@ -31,5 +31,15 @@ export default {
   GET_TOPIC_DETAIL (state, data) {
     state.topicDetail = data
     state.showLoading = false
+  },
+
+  // 验证登录
+  VALIDA_LOGIN (state, data) {
+    state.user = data
+  },
+
+  // 验证登录失败
+  VALIDA_FAIL (state) {
+    state.loginFail = true
   }
 }
