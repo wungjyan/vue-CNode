@@ -6,6 +6,7 @@ export default {
     state.tab = tab
     state.current = idx
     state.page = 1
+    state.showLoading = true
   },
   // 获取主题列表
   FIRST_GET_TOPICS (state, data) {

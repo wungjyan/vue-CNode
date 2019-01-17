@@ -4,6 +4,7 @@ import store from './store'
 import 'amfe-flexible'
 import router from './router'
 import moment from 'moment'
+import './assets/iconfont.css'
 import infiniteScroll from 'vue-infinite-scroll'
 Vue.use(infiniteScroll)
 Vue.config.productionTip = false
