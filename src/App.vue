@@ -5,8 +5,17 @@
 </template>
 
 <script>
+import { local } from './config/util.js'
 export default {
-  name: 'app'
+  name: 'app',
+  mounted () {
+    // 每次加载时检查本地是否有登录信息
+    const user = local.get()
+
+    if (user.id) {
+      this.$store.dispatch('initUser', user)
+    }
+  }
 }
 </script>
 
@@ -27,9 +36,9 @@ export default {
     word-wrap: break-word;
   }
   p{
-        font-size: 28px;
-        color: #333;
-      }
+    font-size: 28px;
+    color: #333;
+  }
   code,pre{
     display: block;
     overflow: auto;

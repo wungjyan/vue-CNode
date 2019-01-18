@@ -1,3 +1,4 @@
+import { local } from '../config/util'
 export default {
   // 切换数据类型前，初始化state
   LOADING (state, { tab, idx }) {
@@ -36,10 +37,17 @@ export default {
   // 验证登录
   VALIDA_LOGIN (state, data) {
     state.user = data
+    // 存到本地
+    local.set(data)
   },
 
   // 验证登录失败
   VALIDA_FAIL (state) {
     state.loginFail = true
+  },
+
+  // 初始化用户信息
+  INIT_USER (state, data) {
+    state.user = data
   }
 }

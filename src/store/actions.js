@@ -43,5 +43,10 @@ export default {
     }).catch(() => {
       commit('VALIDA_FAIL')
     })
+  },
+
+  // 初始化时从本地读取用户信息存进state
+  initUser ({ commit }, data) {
+    commit('INIT_USER', data)
   }
 }
