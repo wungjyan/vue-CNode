@@ -12,7 +12,7 @@
         <div class="nav_item">
           <i class="iconfont icon-xiaoxi"></i>我的消息
         </div>
-        <div class="nav_item">
+        <div class="nav_item" @click="handleCreate">
           <i class="iconfont icon-xinjian"></i>新建主题
         </div>
         <div class="nav_item">
@@ -41,6 +41,9 @@ export default {
     },
     handleLogin () {
       this.$emit('openLogin')
+    },
+    handleCreate () {
+      this.$emit('openCreate')
     }
   },
   mounted () {}
@@ -54,7 +57,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 100;
+  z-index: 10;
   .menu{
     width: 55%;
     height: 100%;

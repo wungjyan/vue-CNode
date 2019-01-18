@@ -4,10 +4,13 @@
     <c-header/>
     <c-list/>
     <transition name="side">
-      <side-bar @hideMenu="closeMenu" @openLogin="goLogin" v-show="showSide"/>
+      <side-bar @hideMenu="closeMenu" @openLogin="goLogin" @openCreate="goCreate" v-show="showSide"/>
     </transition>
     <transition name="login">
       <c-login @hideLogin="closeLogin" v-show="showLogin"/>
+    </transition>
+    <transition name="add">
+      <create-topic @hideCreate="closeCreate" v-show="showCreateTopic"/>
     </transition>
   </div>
 </template>
@@ -17,19 +20,22 @@ import cHeader from '../components/Header/Header'
 import cList from '../components/TopicsList/TopicsList'
 import sideBar from '../components/SideBar/SideBar'
 import cLogin from '../components/Login/Login'
+import createTopic from '../components/CreateTopic/CreateTopic'
 import { mapState } from 'vuex'
 export default {
   components: {
     cHeader,
     cList,
     sideBar,
-    cLogin
+    cLogin,
+    createTopic
   },
   data () {
     return {
       busy: false,
       showSide: false,
-      showLogin: false
+      showLogin: false,
+      showCreateTopic: false
     }
   },
   computed: {
@@ -55,6 +61,12 @@ export default {
     },
     closeLogin () {
       this.showLogin = false
+    },
+    goCreate () {
+      this.showCreateTopic = true
+    },
+    closeCreate () {
+      this.showCreateTopic = false
     }
   },
   mounted () {
@@ -101,6 +113,21 @@ export default {
 }
 .login-enter-active,
 .login-leave-active{
+    transition:all 0.5s;
+}
+
+.add-enter,
+.add-leave-to{
+  opacity: 0;
+  transform: translateX(100%);
+}
+.add-enter-to,
+.add-leave{
+  opacity: 1;
+   transform: translateX(0);
+}
+.add-enter-active,
+.add-leave-active{
     transition:all 0.5s;
 }
 

@@ -48,5 +48,14 @@ export default {
   // 初始化时从本地读取用户信息存进state
   initUser ({ commit }, data) {
     commit('INIT_USER', data)
+  },
+
+  // 新建主题
+  newTopic ({ commit }, data) {
+    post('/topics', data).then(res => {
+      console.log(res)
+    }).catch(() => {
+
+    })
   }
 }
