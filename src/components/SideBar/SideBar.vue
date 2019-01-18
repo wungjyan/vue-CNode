@@ -8,6 +8,17 @@
         <div v-if="user.loginname" class="name">{{user.loginname}}</div>
         <div v-if="!user.loginname" class="login_btn" @click="handleLogin">点击登录</div>
       </div>
+      <div class="nav">
+        <div class="nav_item">
+          <i class="iconfont icon-xiaoxi"></i>我的消息
+        </div>
+        <div class="nav_item">
+          <i class="iconfont icon-xinjian"></i>新建主题
+        </div>
+        <div class="nav_item">
+          <i class="iconfont icon-about"></i>关于
+        </div>
+      </div>
     </div>
     <div class="mask" @click="handleClose"></div>
   </div>
@@ -74,6 +85,17 @@ export default {
         font-size: 40px;
         color: #333;
         text-decoration: underline;
+      }
+    }
+    .nav{
+      .nav_item{
+        font-size: 30px;
+        padding: 30px 0 30px 110px;
+        border-bottom: 1px solid #eee;
+        i{
+          font-size: 32px;
+          margin-right: 10px;
+        }
       }
     }
   }
