@@ -9,5 +9,6 @@ export default {
   showLoadMore: true, // 是否显示底部加载更多loading
 
   topicDetail: {}, // 主题详情
+  isCollect: false, // 是否收藏了主题，单独作为一个状态，便于收藏或取消
   showLoading: true // 控制详情页加载时显示loading
 }

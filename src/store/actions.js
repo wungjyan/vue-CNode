@@ -24,12 +24,24 @@ export default {
   },
 
   // 获取主题详情
-  getTopicDetail ({ commit }, id) {
-    get('/topic/' + id).then(res => {
-      if (res.data.success) {
-        commit('GET_TOPIC_DETAIL', res.data.data)
-      }
-    })
+  getTopicDetail ({ commit }, { accesstoken, id }) {
+    if (accesstoken) {
+      // 登录状态下获取
+      get('/topic/' + id, { accesstoken }).then(res => {
+        console.log('登陆过:', res)
+        if (res.data.success) {
+          commit('GET_TOPIC_DETAIL', res.data.data)
+        }
+      })
+    } else {
+      // 未登录状态下获取
+      get('/topic/' + id).then(res => {
+        console.log('未登陆过:', res)
+        if (res.data.success) {
+          commit('GET_TOPIC_DETAIL', res.data.data)
+        }
+      })
+    }
   },
 
   // 验证登录
@@ -59,6 +71,26 @@ export default {
       }
     }).catch(() => {
 
+    })
+  },
+
+  // 收藏主题
+  collectTopic({ commit }, { accesstoken, topic_id }){ // eslint-disable-line
+    post('/topic_collect/collect', { accesstoken, topic_id }).then(res => {
+      console.log(res)
+      if (res.data.success) {
+        commit('COLLECT_TOPIC')
+      }
+    })
+  },
+
+  // 取消收藏
+  cancelTopic ({ commit }, { accesstoken, topic_id }) { // eslint-disable-line
+    post('/topic_collect/de_collect', { accesstoken, topic_id }).then(res => {
+      console.log(res)
+      if (res.data.success) {
+        commit('CANCEL_TOPIC')
+      }
     })
   }
 }

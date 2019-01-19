@@ -16,9 +16,15 @@
             <span>{{topicDetail.visit_count}} 次浏览 </span>
             <span>来自 {{getTab(topicDetail.tab)}}</span>
           </div>
+          <div class="btn" v-if="user.accesstoken">
+            <span v-if="!isCollect" class="span_collect" @click="collect">收藏</span>
+            <span v-else class="span_cancel" @click="cancel">取消收藏</span>
+          </div>
         </div>
         <div class="topic_main" v-html="topicDetail.content"></div>
-        <div class="reply_header">{{topicDetail.reply_count}}回复</div>
+        <div class="reply_header">
+            {{topicDetail.reply_count}}回复
+        </div>
         <c-reply v-for="(item,index) in topicDetail.replies" :key="item.id" :info="item" :idx="index"/>
       </div>
     </div>
@@ -39,10 +45,11 @@ export default {
   },
   data () {
     return {
+      topic_id: ''
     }
   },
   computed: {
-    ...mapState(['showLoading', 'topicDetail'])
+    ...mapState(['showLoading', 'topicDetail', 'user', 'isCollect'])
   },
   methods: {
     getTab (tab) {
@@ -56,11 +63,19 @@ export default {
         default:
           return '分享'
       }
+    },
+    collect () {
+      this.$store.dispatch('collectTopic', { accesstoken: this.user.accesstoken, topic_id: this.topic_id })
+    },
+    cancel () {
+      this.$store.dispatch('cancelTopic', { accesstoken: this.user.accesstoken, topic_id: this.topic_id })
     }
   },
   mounted () {
     let id = this.$route.params.id
-    this.$store.dispatch('getTopicDetail', id)
+    this.topic_id = id
+    let accesstoken = this.user.accesstoken ? this.user.accesstoken : ''
+    this.$store.dispatch('getTopicDetail', { accesstoken, id })
   }
 }
 </script>
@@ -74,6 +89,21 @@ export default {
     .topic_header{
       padding: 10px;
       border-bottom: 1px solid #838383;
+      .btn{
+        text-align: right;
+        span{
+          padding: 6px 20px;
+          color: #fff;
+          font-size: 28px;
+          border-radius: 6px;
+          &.span_collect{
+            background-color: #80bd01;
+          }
+          &.span_cancel{
+            background-color: #909090;
+          }
+        }
+      }
     }
     .content{
       background: #fff;

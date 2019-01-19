@@ -31,6 +31,7 @@ export default {
   // 获取topic详情
   GET_TOPIC_DETAIL (state, data) {
     state.topicDetail = data
+    state.isCollect = data.is_collect
     state.showLoading = false
   },
 
@@ -49,5 +50,15 @@ export default {
   // 初始化用户信息
   INIT_USER (state, data) {
     state.user = data
+  },
+
+  // 收藏主题
+  COLLECT_TOPIC (state) {
+    state.isCollect = true
+  },
+
+  // 取消主题
+  CANCEL_TOPIC (state) {
+    state.isCollect = false
   }
 }
