@@ -54,6 +54,9 @@ export default {
   newTopic ({ commit }, data) {
     post('/topics', data).then(res => {
       console.log(res)
+      if (res.data.success) {
+        this.$toast('发布成功')
+      }
     }).catch(() => {
 
     })

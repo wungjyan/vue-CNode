@@ -9,7 +9,7 @@
         <div v-if="!user.loginname" class="login_btn" @click="handleLogin">点击登录</div>
       </div>
       <div class="nav">
-        <div class="nav_item">
+        <div class="nav_item" @click="handleMessage">
           <i class="iconfont icon-xiaoxi"></i>我的消息
         </div>
         <div class="nav_item" @click="handleCreate">
@@ -44,6 +44,9 @@ export default {
     },
     handleCreate () {
       this.$emit('openCreate')
+    },
+    handleMessage () {
+      this.$emit('openMessage')
     }
   },
   mounted () {}

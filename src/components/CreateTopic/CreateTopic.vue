@@ -1,5 +1,5 @@
 <template>
-  <div class="message">
+  <div class="create_topic">
     <div class="header">
       <i class="iconfont icon-back" @click="goBack"></i>
       <h1>发布主题</h1>
@@ -52,7 +52,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.message{
+.create_topic{
   position: fixed;
   top: 0;
   right: 0;

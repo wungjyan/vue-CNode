@@ -4,12 +4,15 @@
     <c-header/>
     <c-list/>
     <transition name="side">
-      <side-bar @hideMenu="closeMenu" @openLogin="goLogin" @openCreate="goCreate" v-show="showSide"/>
+      <side-bar @hideMenu="closeMenu" @openLogin="goLogin" @openCreate="goCreate" @openMessage="goMessage" v-show="showSide"/>
     </transition>
     <transition name="login">
       <c-login @hideLogin="closeLogin" v-show="showLogin"/>
     </transition>
-    <transition name="add">
+    <transition name="right">
+      <c-message @hideMessage="closeMessage" v-show="showMessage"/>
+    </transition>
+    <transition name="right">
       <create-topic @hideCreate="closeCreate" v-show="showCreateTopic"/>
     </transition>
   </div>
@@ -21,6 +24,7 @@ import cList from '../components/TopicsList/TopicsList'
 import sideBar from '../components/SideBar/SideBar'
 import cLogin from '../components/Login/Login'
 import createTopic from '../components/CreateTopic/CreateTopic'
+import cMessage from '../components/Message/Message'
 import { mapState } from 'vuex'
 export default {
   components: {
@@ -28,6 +32,7 @@ export default {
     cList,
     sideBar,
     cLogin,
+    cMessage,
     createTopic
   },
   data () {
@@ -35,7 +40,8 @@ export default {
       busy: false,
       showSide: false,
       showLogin: false,
-      showCreateTopic: false
+      showCreateTopic: false,
+      showMessage: false
     }
   },
   computed: {
@@ -67,6 +73,12 @@ export default {
     },
     closeCreate () {
       this.showCreateTopic = false
+    },
+    goMessage () {
+      this.showMessage = true
+    },
+    closeMessage () {
+      this.showMessage = false
     }
   },
   mounted () {
@@ -116,18 +128,18 @@ export default {
     transition:all 0.5s;
 }
 
-.add-enter,
-.add-leave-to{
+.right-enter,
+.right-leave-to{
   opacity: 0;
   transform: translateX(100%);
 }
-.add-enter-to,
-.add-leave{
+.right-enter-to,
+.right-leave{
   opacity: 1;
    transform: translateX(0);
 }
-.add-enter-active,
-.add-leave-active{
+.right-enter-active,
+.right-leave-active{
     transition:all 0.5s;
 }
 
