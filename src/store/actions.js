@@ -92,5 +92,26 @@ export default {
         commit('CANCEL_TOPIC')
       }
     })
+  },
+
+  // 评论
+  commitReply ({ commit }, data) {
+    const { accesstoken, content } = data
+    post('/topic/' + data.id + '/replies', { accesstoken, content }).then(res => {
+      console.log(res)
+      if (res.data.success) {
+        commit('REPLY_SUCCESS')
+      }
+    })
+  },
+
+  // 点赞
+  up ({ commit }, { accesstoken, id }) {
+    post('/reply/' + id + '/ups', { accesstoken }).then(res => {
+      console.log(res)
+      if (res.data.success) {
+        commit('UP_SUCCESS')
+      }
+    })
   }
 }

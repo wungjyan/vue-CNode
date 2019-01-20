@@ -23,9 +23,19 @@
         </div>
         <div class="topic_main" v-html="topicDetail.content"></div>
         <div class="reply_header">
-            {{topicDetail.reply_count}}回复
+            <div class="row1">
+              <span>{{topicDetail.reply_count}}回复</span>
+              <span @click="showInput = true">添加评论</span>
+            </div>
+            <transition name="input">
+              <div class="row2" v-show="showInput">
+                <input placeholder="输入内容" v-model="reply"/>
+                <span class="commit_reply" @click="commitReply">{{action}}</span>
+                <span class="cancel_reply" @click="showInput = false">取消</span>
+              </div>
+            </transition>
         </div>
-        <c-reply v-for="(item,index) in topicDetail.replies" :key="item.id" :info="item" :idx="index"/>
+        <c-reply v-for="(item,index) in replies" :key="item.id" :info="item" :idx="index" :len="replies.length" :token="user.accesstoken"/>
       </div>
     </div>
 
@@ -45,11 +55,24 @@ export default {
   },
   data () {
     return {
-      topic_id: ''
+      topic_id: '',
+      showInput: false,
+      reply: '',
+      action: '回复'
     }
   },
   computed: {
-    ...mapState(['showLoading', 'topicDetail', 'user', 'isCollect'])
+    ...mapState(['showLoading', 'topicDetail', 'user', 'isCollect', 'replyStatus']),
+    replies () {
+      const replies = this.topicDetail.replies
+      return replies.reverse()
+    }
+  },
+  watch: {
+    replyStatus () {
+      this.action = '回复'
+      this.$store.dispatch('getTopicDetail', { accesstoken: this.user.accesstoken, id: this.topic_id })
+    }
   },
   methods: {
     getTab (tab) {
@@ -69,6 +92,11 @@ export default {
     },
     cancel () {
       this.$store.dispatch('cancelTopic', { accesstoken: this.user.accesstoken, topic_id: this.topic_id })
+    },
+    commitReply () {
+      this.action = '回复中...'
+      this.$store.dispatch('commitReply', { accesstoken: this.user.accesstoken, content: this.reply, id: this.topic_id })
+      this.reply = ''
     }
   },
   mounted () {
@@ -136,12 +164,52 @@ export default {
         color: #333;
       }
       .reply_header{
-        color: #444;
+        color: #333;
         font-size: 28px;
         padding: 10px;
         background-color: #f6f6f6;
+        margin-top: 10px;
+        .row1{
+          display: flex;
+          justify-content: space-between;
+        }
+        .row2{
+          margin-top: 10px;
+          input{
+            width: 100%;
+            padding: 10px 0;
+          }
+          span{
+            display: inline-block;
+            margin-top: 6px;
+            padding: 4px 20px;
+            color: #fff;
+            border-radius: 6px;
+            margin-right: 10px;
+            &.commit_reply{
+              background: #80bd01;
+            }
+            &.cancel_reply{
+              background-color: #909090;
+            }
+          }
+        }
       }
     }
   }
+}
+.input-enter,
+.input-leave-to{
+  opacity: 0;
+  transform: translateY(-100%);
+}
+.input-enter-to,
+.input-leave{
+  opacity: 1;
+  transform: translateY(0);
+}
+.input-enter-active,
+.input-leave-active{
+    transition:all 0.4s;
 }
 </style>

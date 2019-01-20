@@ -33,6 +33,7 @@ export default {
     state.topicDetail = data
     state.isCollect = data.is_collect
     state.showLoading = false
+    state.replyStatus = false
   },
 
   // 验证登录
@@ -60,5 +61,14 @@ export default {
   // 取消主题
   CANCEL_TOPIC (state) {
     state.isCollect = false
+  },
+
+  // 评论成功
+  REPLY_SUCCESS (state) {
+    state.replyStatus = true
+  },
+  // 点赞成功
+  UP_SUCCESS (state) {
+    state.replyStatus = true
   }
 }

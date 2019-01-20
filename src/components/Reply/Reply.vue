@@ -4,10 +4,10 @@
       <div class="user_info">
         <img :src="info.author.avatar_url">
         <span class="name">{{info.author.loginname}}</span>
-        <span class="site">{{idx+1}}楼•{{formatTime(info.create_at)}}</span>
+        <span class="site">{{len-idx}}楼•{{formatTime(info.create_at)}}</span>
       </div>
       <div class="user_action">
-        <i class="iconfont icon-dianzan"></i>{{info.ups.length}}
+        <i class="iconfont icon-dianzan" @click="up"></i>{{info.ups.length}}
       </div>
     </div>
     <div class="reply_content" v-html="info.content"></div>
@@ -26,15 +26,24 @@ export default {
     idx: {
       type: Number,
       default: 0
+    },
+    len: {
+      type: Number,
+      default: 0
+    },
+    token: {
+      type: String
     }
   },
   data () {
     return {
     }
   },
-  computed: {},
-  methods: {},
-  mounted () {}
+  methods: {
+    up () {
+      this.$store.dispatch('up', { accesstoken: this.token, id: this.info.id })
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
