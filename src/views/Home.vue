@@ -69,12 +69,20 @@ export default {
       this.showLogin = false
     },
     goCreate () {
+      if (!this.user.id) {
+        this.showLogin = true
+        return
+      }
       this.showCreateTopic = true
     },
     closeCreate () {
       this.showCreateTopic = false
     },
     goMessage () {
+      if (!this.user.id) {
+        this.showLogin = true
+        return
+      }
       this.showMessage = true
     },
     closeMessage () {

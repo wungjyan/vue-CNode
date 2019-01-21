@@ -25,7 +25,7 @@
         <div class="reply_header">
             <div class="row1">
               <span>{{topicDetail.reply_count}}回复</span>
-              <span @click="showInput = true">添加评论</span>
+              <span @click="handleAddReply">添加评论</span>
             </div>
             <transition name="input">
               <div class="row2" v-show="showInput">
@@ -93,7 +93,18 @@ export default {
     cancel () {
       this.$store.dispatch('cancelTopic', { accesstoken: this.user.accesstoken, topic_id: this.topic_id })
     },
+    handleAddReply () {
+      if (!this.user.id) {
+        this.$toast('评论前请登录')
+        return
+      }
+      this.showInput = true
+    },
     commitReply () {
+      if (!this.reply) {
+        this.$toast('回复内容不能为空')
+        return
+      }
       this.action = '回复中...'
       this.$store.dispatch('commitReply', { accesstoken: this.user.accesstoken, content: this.reply, id: this.topic_id })
       this.reply = ''
@@ -164,11 +175,10 @@ export default {
         color: #333;
       }
       .reply_header{
-        color: #333;
         font-size: 28px;
         padding: 10px;
         background-color: #f6f6f6;
-        margin-top: 10px;
+        margin-top: 20px;
         .row1{
           display: flex;
           justify-content: space-between;

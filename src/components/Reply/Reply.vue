@@ -41,6 +41,10 @@ export default {
   },
   methods: {
     up () {
+      if (!this.token) {
+        this.$toast('点赞前请登录')
+        return
+      }
       this.$store.dispatch('up', { accesstoken: this.token, id: this.info.id })
     }
   }

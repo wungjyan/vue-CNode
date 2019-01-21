@@ -36,6 +36,8 @@ export default {
     login () {
       if (this.token) {
         this.$store.dispatch('validaLogin', this.token)
+      } else {
+        this.$toast('输入不能为空')
       }
     }
   },
