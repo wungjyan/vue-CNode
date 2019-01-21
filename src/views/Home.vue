@@ -67,6 +67,8 @@ export default {
     },
     closeLogin () {
       this.showLogin = false
+      // 关闭消息页后，将所有消息标为已读
+      this.$store.dispatch('markAll', { accesstoken: this.user.accesstoken })
     },
     goCreate () {
       if (!this.user.id) {
@@ -84,6 +86,7 @@ export default {
         return
       }
       this.showMessage = true
+      this.$store.dispatch('getMessage', { accesstoken: this.user.accesstoken })
     },
     closeMessage () {
       this.showMessage = false

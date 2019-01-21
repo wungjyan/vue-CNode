@@ -11,5 +11,8 @@ export default {
   topicDetail: {}, // 主题详情
   isCollect: false, // 是否收藏了主题，单独作为一个状态，便于收藏或取消
   showLoading: true, // 控制主题页加载时显示loading
-  replyStatus: false // 评论或点赞变化的状态
+  replyStatus: false, // 评论或点赞变化的状态
+
+  hasNotRead: [], // 未读消息
+  hasRead: [] // 已读消息
 }

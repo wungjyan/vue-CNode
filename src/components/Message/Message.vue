@@ -4,23 +4,45 @@
       <i class="iconfont icon-back" @click="goBack"></i>
       <h1>我的消息</h1>
     </div>
+    <div class="hasnot_read msg">
+      <div class="title">未读消息</div>
+      <div class="list" v-if="!hasNotRead.length">无消息</div>
+      <div class="list" v-else>
+        <p v-for="(item,index) in hasNotRead" :key="index">
+          <span v-if="item.type==='reply'">{{item.author.loginname}} 回复了你的话题 {{item.topic.title}}</span>
+        </p>
+      </div>
+    </div>
+    <div class="has_read msg">
+      <div class="title">已读消息</div>
+      <div class="list" v-if="!hasRead.length">无消息</div>
+      <div class="list" v-else>
+        <p v-for="(item,index) in hasRead" :key="index">
+          <span v-if="item.type==='reply'">{{item.author.loginname}} 回复了你的话题 {{item.topic.title}}</span>
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   components: {},
   data () {
     return {
     }
   },
-  computed: {},
+  computed: {
+    ...mapState(['user', 'hasNotRead', 'hasRead'])
+  },
   methods: {
     goBack () {
       this.$emit('hideMessage')
     }
   },
-  mounted () {}
+  mounted () {
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -32,7 +54,7 @@ export default {
   left: 0;
   background: #ffffff;
   z-index: 20;
-    .header{
+  .header{
     position: relative;
     width: 100%;
     height: 100px;
@@ -51,6 +73,19 @@ export default {
       line-height: 100px;
       font-size: 40px;
       text-align: center;
+    }
+  }
+  .msg{
+    margin:0 10px 20px 10px;
+    font-size: 28px;
+    .title{
+      padding: 10px;
+      background: #f6f6f6;
+      color: #333;
+    }
+    .list{
+      background: #fff;
+      padding: 10px;
     }
   }
 }

@@ -113,5 +113,21 @@ export default {
         commit('UP_SUCCESS')
       }
     })
+  },
+
+  // 获取消息
+  getMessage ({ commit }, { accesstoken }) {
+    get('/messages', { accesstoken }).then(res => {
+      if (res.data.success) {
+        commit('GET_MSG_SUCCESS', res.data.data)
+      }
+    })
+  },
+
+  // 标记所有消息为已读
+  markAll ({ commit }, { accesstoken }) {
+    post('/message/mark_all', { accesstoken }).then(res => {
+      console.log(res)
+    })
   }
 }

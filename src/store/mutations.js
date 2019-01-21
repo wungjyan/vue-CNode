@@ -70,5 +70,11 @@ export default {
   // 点赞成功
   UP_SUCCESS (state) {
     state.replyStatus = true
+  },
+
+  // 成功获取消息
+  GET_MSG_SUCCESS (state, data) {
+    state.hasNotRead = data.hasnot_read_messages
+    state.hasRead = data.has_read_messages
   }
 }
