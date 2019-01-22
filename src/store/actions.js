@@ -124,9 +124,9 @@ export default {
     })
   },
 
-  // 标记所有消息为已读
-  markAll ({ commit }, { accesstoken }) {
-    post('/message/mark_all', { accesstoken }).then(res => {
+  // 标记单个消息为已读
+  markOne ({ commit }, { id, accesstoken }) {
+    post('/message/mark_one/' + id, { accesstoken }).then(res => {
       console.log(res)
     })
   }

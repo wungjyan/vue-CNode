@@ -9,7 +9,9 @@
       <div class="list" v-if="!hasNotRead.length">无消息</div>
       <div class="list" v-else>
         <p v-for="(item,index) in hasNotRead" :key="index">
-          <span v-if="item.type==='reply'">{{item.author.loginname}} 回复了你的话题 {{item.topic.title}}</span>
+          <span v-if="item.type==='reply'">
+            {{item.author.loginname}} 回复了你的话题 <a href="javascript:;" @click="gotoTopic('n',item.topic.id,item.id)">{{item.topic.title}}</a>
+          </span>
         </p>
       </div>
     </div>
@@ -18,7 +20,9 @@
       <div class="list" v-if="!hasRead.length">无消息</div>
       <div class="list" v-else>
         <p v-for="(item,index) in hasRead" :key="index">
-          <span v-if="item.type==='reply'">{{item.author.loginname}} 回复了你的话题 {{item.topic.title}}</span>
+          <span v-if="item.type==='reply'">
+            {{item.author.loginname}} 回复了你的话题 <a href="javascript:;" @click="gotoTopic('y',item.topic.id)">{{item.topic.title}}</a>
+          </span>
         </p>
       </div>
     </div>
@@ -39,6 +43,12 @@ export default {
   methods: {
     goBack () {
       this.$emit('hideMessage')
+    },
+    gotoTopic (key, id, msg_id) { // eslint-disable-line
+      if (key === 'n') {
+        this.$store.dispatch('markOne', { id: msg_id, accesstoken: this.user.accesstoken })
+      }
+      this.$router.push({ name: 'topic', params: { id } })
     }
   },
   mounted () {
