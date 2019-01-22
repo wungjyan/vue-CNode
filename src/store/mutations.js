@@ -76,5 +76,10 @@ export default {
   GET_MSG_SUCCESS (state, data) {
     state.hasNotRead = data.hasnot_read_messages
     state.hasRead = data.has_read_messages
+  },
+
+  // 退出登录
+  LOGIN_OUT (state) {
+    state.user = {}
   }
 }

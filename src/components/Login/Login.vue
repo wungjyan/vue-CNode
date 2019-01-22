@@ -7,9 +7,9 @@
       <div class="btn" @click="login">验证登录</div>
       <div class="fail" v-show="loginFail">验证失败，请刷新token重试</div>
       <div class="tip">
-        <p>登录后可以体验完整功能</p>
-        <p>Access Token 可在CNode登录后，设置里面拿到</p>
-        <p>API 来自官方，不用担心隐私</p>
+        <p>• 登录后可以体验完整功能</p>
+        <p>• Access Token 可在CNode登录后，设置里面拿到</p>
+        <p>• API 来自官方，不用担心隐私</p>
       </div>
     </div>
   </div>

@@ -15,6 +15,9 @@
         <div class="nav_item" @click="handleCreate">
           <i class="iconfont icon-xinjian"></i>新建主题
         </div>
+        <div class="nav_item" @click="handleLoginOut">
+          <i class="iconfont icon-tuichu"></i>退出登录
+        </div>
         <div class="nav_item">
           <i class="iconfont icon-about"></i>关于
         </div>
@@ -26,6 +29,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { local } from '../../config/util.js'
 export default {
   components: {},
   data () {
@@ -47,6 +51,11 @@ export default {
     },
     handleMessage () {
       this.$emit('openMessage')
+    },
+    handleLoginOut () {
+      // 退出登录 => 清空本地信息 => 清空vuex数据
+      local.clear()
+      this.$store.dispatch('loginOut')
     }
   },
   mounted () {}

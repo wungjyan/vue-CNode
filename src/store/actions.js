@@ -129,5 +129,10 @@ export default {
     post('/message/mark_one/' + id, { accesstoken }).then(res => {
       console.log(res)
     })
+  },
+
+  // 退出登录
+  loginOut ({ commit }) {
+    commit('LOGIN_OUT')
   }
 }
