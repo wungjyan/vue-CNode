@@ -98,15 +98,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home{
-  .iconfont{
+  .icon-menu{
     position: fixed;
     top: 20px;
-    left: 20px;
+    left: 40px;
     font-size: 50px;
     font-weight: 700;
     color: #ffffff;
     z-index: 20;
-
   }
 }
 .side-enter,
