@@ -1,5 +1,6 @@
 <template>
   <div class="topic_detail">
+    <i class="iconfont icon-back" @click="goBack"></i>
     <c-header/>
     <div class="content_wrap">
       <c-loading v-if="showLoading"/>
@@ -87,6 +88,9 @@ export default {
           return '分享'
       }
     },
+    goBack () {
+      this.$router.go(-1)
+    },
     collect () {
       this.$store.dispatch('collectTopic', { accesstoken: this.user.accesstoken, topic_id: this.topic_id })
     },
@@ -123,6 +127,14 @@ export default {
   padding:10px;
   background-color: rgba(0,0,0,0.2);
   min-height: 100vh;
+  .icon-back{
+    position: fixed;
+    top: 30px;
+    left: 20px;
+    font-size: 50px;
+    color: #fff;
+    z-index:20;
+  }
   .content_wrap{
     margin-top: 280px;
     .topic_header{
