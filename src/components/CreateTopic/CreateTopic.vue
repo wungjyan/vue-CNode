@@ -47,8 +47,7 @@ export default {
     goBack () {
       this.$emit('hideCreate')
     }
-  },
-  mounted () {}
+  }
 }
 </script>
 <style lang="scss" scoped>

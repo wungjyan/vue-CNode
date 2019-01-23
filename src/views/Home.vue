@@ -4,16 +4,19 @@
     <c-header/>
     <c-list/>
     <transition name="side">
-      <side-bar @hideMenu="closeMenu" @openLogin="goLogin" @openCreate="goCreate" @openMessage="goMessage" v-show="showSide"/>
+      <side-bar @hideMenu="closeMenu" @openLogin="goLogin" @openCreate="goCreate" @openMessage="goMessage" @openAbout="goAbout" v-show="showSide"/>
     </transition>
     <transition name="login">
-      <c-login @hideLogin="closeLogin" v-show="showLogin"/>
+      <c-login @hideLogin="closeLogin" v-if="showLogin"/>
     </transition>
     <transition name="right">
-      <c-message @hideMessage="closeMessage" v-show="showMessage"/>
+      <c-message @hideMessage="closeMessage" v-if="showMessage"/>
     </transition>
     <transition name="right">
-      <create-topic @hideCreate="closeCreate" v-show="showCreateTopic"/>
+      <create-topic @hideCreate="closeCreate" v-if="showCreateTopic"/>
+    </transition>
+    <transition name="right">
+      <c-about @hideAbout="closeAbout" v-if="showAbout"/>
     </transition>
   </div>
 </template>
@@ -25,6 +28,7 @@ import sideBar from '../components/SideBar/SideBar'
 import cLogin from '../components/Login/Login'
 import createTopic from '../components/CreateTopic/CreateTopic'
 import cMessage from '../components/Message/Message'
+import cAbout from '../components/About/About'
 import { mapState } from 'vuex'
 export default {
   components: {
@@ -33,7 +37,8 @@ export default {
     sideBar,
     cLogin,
     cMessage,
-    createTopic
+    createTopic,
+    cAbout
   },
   data () {
     return {
@@ -41,7 +46,8 @@ export default {
       showSide: false,
       showLogin: false,
       showCreateTopic: false,
-      showMessage: false
+      showMessage: false,
+      showAbout: false
     }
   },
   computed: {
@@ -88,6 +94,12 @@ export default {
     },
     closeMessage () {
       this.showMessage = false
+    },
+    goAbout () {
+      this.showAbout = true
+    },
+    closeAbout () {
+      this.showAbout = false
     }
   },
   mounted () {

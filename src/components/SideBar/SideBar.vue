@@ -18,7 +18,7 @@
         <div class="nav_item" @click="handleLoginOut">
           <i class="iconfont icon-tuichu"></i>退出登录
         </div>
-        <div class="nav_item">
+        <div class="nav_item" @click="handleAbout">
           <i class="iconfont icon-about"></i>关于
         </div>
       </div>
@@ -56,6 +56,9 @@ export default {
       // 退出登录 => 清空本地信息 => 清空vuex数据
       local.clear()
       this.$store.dispatch('loginOut')
+    },
+    handleAbout () {
+      this.$emit('openAbout')
     }
   },
   mounted () {}
