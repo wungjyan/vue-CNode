@@ -14,11 +14,6 @@ export default new Router({
       path: '/topic/:id',
       name: 'topic',
       component: () => import(/* webpackChunkName: "about" */ './views/Topic.vue')
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     }
   ]
 })
