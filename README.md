@@ -42,14 +42,3 @@ mutations.js
   }
 
 ```
-
-
-## 使用自定义事件通信
-组件化的开发模式，使用 vuex 给我带来很大的便利，但也不是所有的通信都需要使用 vuex，在父子组件中的通信，使用`$emit`自定义事件有时更方便。
-
-比如项目中的侧边栏组件（`src/components/SideBar`）与登录组件（`src/components/Login`），它们不是父子关系而是兄弟关系，有一个共同的父组件（`src/views/Home.vue`）SideBar 通过发送自定义事件给父组件，来控制登录组件的显示，登录组件也可以发送自定义事件来隐藏自身。在侧边栏里的相关交互都是采用这种方式来实现，SideBar 组件也绑定了不止一个自定义事件，代码如下：
-```
-<transition name="side">
-    <side-bar @hideMenu="closeMenu" @openLogin="goLogin" @openCreate="goCreate" @openMessage="goMessage" v-show="showSide"/>
-</transition>
-```
