@@ -1,8 +1,8 @@
-# vue 开发的 CNode社区
+# vue 开发的 CNode社区（移动端）
 > vue-cli3 + vuex + vue-router + axios + localStorage
 
 ## 浏览地址 
-[http://120.78.167.54:8080/#/](http://120.78.167.54:8080/#/)
+[http://120.78.167.54:8080/#/](http://120.78.167.54:8080/#/) （浏览器打开调试模式）
 
 ## 特点
 - 移动端自适应，采用方案 [amfe-flexible](https://github.com/amfe/lib-flexible) + postcss-px2rem
